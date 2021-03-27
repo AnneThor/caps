@@ -17,17 +17,17 @@ Express, Node Event Driven App that represents live tracking of a parcel deliver
 
 Currently working on the backend, so there is no front end display yet
 
-- ```npm start```
+- ```npm start```: this will run the app in the console, right now it will just log the activity of pickups, in transit deliveries and completed deliveries in the console until the program is stopped.
 
 ### Endpoints:
 
-Front end tbd.
+Front end coming soon.
 
 ## Tests
 
-- Unit Tests: ```npm run test``` (auth-routes, non ACL routes, and ACL route test suites implemented)
+- Unit Tests: ```npm run test``` testing is complete for listener functions
 - Lint Tests: ```npm run lint```
 
-## UML Diagram 
+## UML Diagram
 
-![UML Diagram](./Lab09.png)
+![UML Diagram](./Lab11.png)

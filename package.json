@@ -1,0 +1,26 @@
+{
+  "name": "caps",
+  "version": "1.0.0",
+  "description": "Node/Express event driven app simulating a real time parcel delivery service",
+  "main": "caps.js",
+  "scripts": {
+    "start": "nodemon caps.js",
+    "test": "jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AnneThor/caps.git"
+  },
+  "author": "Anne Thorsteinson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AnneThor/caps/issues"
+  },
+  "homepage": "https://github.com/AnneThor/caps#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "eslint": "^7.23.0",
+    "faker": "^5.5.1",
+    "jest": "^26.6.3"
+  }
+}
