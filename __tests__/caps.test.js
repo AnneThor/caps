@@ -1,8 +1,7 @@
 'use strict';
 
-require('../caps.js');
+const log = require('../caps.js');
 const events = require('../events.js');
-
 const faker = require('faker')
 
 describe("CAPS functionality", () => {
@@ -13,6 +12,7 @@ describe("CAPS functionality", () => {
     customerName: faker.name.findName(),
     address: faker.address.streetAddress(),
   };
+
   let pickup = { 'event': 'pickup' };
   let inTransit = { 'event': 'in-transit' };
   let delivered = { 'event': 'delivered' };
@@ -22,15 +22,26 @@ describe("CAPS functionality", () => {
     spy = jest.spyOn(console, 'log').mockImplementation();
   })
 
-  test('that the log function logs when called', () => {
-    events.emit('delivered', payload, delivered);
-    expect(spy).toHaveBeenCalled();
+  afterEach(() => {
+    jest.resetAllMocks();
   })
 
-  test('that the log function logs correctly on pickup', () => {
-    events.emit('pickup', payload, pickup);
+  test('that the log function logs when called on PICKUP', () => {
+    log(payload, pickup);
     expect(spy).toHaveBeenCalled();
-    expect(spy).toHaveBeenCalledTimes(3);
+    expect(spy).toHaveBeenCalledTimes(1);
+  })
+
+  test('that the log function logs when called on INTRANSIT', () => {
+    log(payload, inTransit);
+    expect(spy).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalledTimes(1);
+  })
+
+  test('that the log function logs when called on DELIVERY', () => {
+    log(payload, delivered);
+    expect(spy).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalledTimes(1);
   })
 
 })

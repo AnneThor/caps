@@ -29,3 +29,8 @@ function thankYou(payload) {
 events.on('delivered', thankYou)
 
 orderGenerator();
+
+module.exports = {
+  makeOrders: orderGenerator,
+  thank: thankYou,
+}
