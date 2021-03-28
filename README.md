@@ -11,7 +11,7 @@ Express, Node Event Driven App that represents live tracking of a parcel deliver
 
 ```.env``` requirements:
 
-- currently none
+- ```STORE_NAME```: the name of the store currently operating
 
 ## Running the App
 
