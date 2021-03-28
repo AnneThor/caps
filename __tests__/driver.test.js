@@ -1,6 +1,6 @@
 'use strict';
 
-require('../driver.js');
+const { pickup, intransit } = require('../driver.js');
 const faker = require('faker')
 const events = require('../events.js');
 
@@ -13,8 +13,8 @@ describe("VENDOR functionality", () => {
     address: faker.address.streetAddress(),
   }
 
-  let pickup = { event: 'pickup' };
-  let inTransit = { event: 'in-transit' };
+  let pickupEvent = { event: 'pickup' };
+  let inTransitEvent = { event: 'in-transit' };
 
   let spy;
 
@@ -27,33 +27,35 @@ describe("VENDOR functionality", () => {
   })
 
   test('that pickup emits an intransit signal', () => {
-    events.emit('pickup', payload, pickup);
     spy = jest.spyOn(events, 'emit').mockImplementation();
-    jest.advanceTimersByTime(5000*5);
+    pickup(payload, pickupEvent);
+    jest.advanceTimersByTime(1000);
     expect(spy).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalledTimes(1);
   })
 
   test('that pickup method logs correctly', () => {
     spy = jest.spyOn(console, 'log').mockImplementation();
-    events.emit('pickup', payload, pickup);
-    jest.advanceTimersByTime(5000*5);
+    pickup(payload, pickupEvent);
+    jest.advanceTimersByTime(1000);
     expect(spy).toHaveBeenCalled();
     expect(spy).toHaveBeenCalledWith(`DRIVER: picked up ${payload.orderId}`);
   })
 
   test('that in-transit emits an delivered signal', () => {
-    events.emit('in-transit', payload, inTransit);
     spy = jest.spyOn(events, 'emit').mockImplementation();
-    jest.advanceTimersByTime(5000*5);
+    intransit(payload, inTransitEvent);
+    jest.advanceTimersByTime(3000);
     expect(spy).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalledTimes(1);
   })
 
   test('that in-transit method logs correctly', () => {
     spy = jest.spyOn(console, 'log').mockImplementation();
-    events.emit('in-transit', payload, inTransit);
-    jest.advanceTimersByTime(5000*5);
+    intransit(payload, inTransitEvent);
+    jest.advanceTimersByTime(3000);
     expect(spy).toHaveBeenCalled();
-    // expect(spy).toHaveBeenCalledWith(`DRIVER: delivered order ${payload.orderId}`);
+    expect(spy).toHaveBeenCalledWith(`DRIVER: delivered order ${payload.orderId}`);
   })
 
 })

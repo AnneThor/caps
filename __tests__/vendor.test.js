@@ -1,6 +1,6 @@
 'use strict';
 
-require('../vendor.js');
+const { makeOrders, thank } = require('../vendor.js');
 const faker = require('faker')
 const events = require('../events.js');
 
@@ -25,15 +25,17 @@ describe("VENDOR functionality", () => {
     jest.resetAllMocks();
   })
 
-  // test('the ORDER GENERATOR is properly making order objects', () => {
-  //   spy = jest.spyOn(events, 'emit').mockImplementation();
-  //   jest.advanceTimersByTime(5000*15);
-  //   expect(spy).toHaveBeenCalled();
-  // })
+  test('the ORDER GENERATOR is properly making order objects', () => {
+    makeOrders();
+    spy = jest.spyOn(events, 'emit').mockImplementation();
+    jest.advanceTimersByTime(5000*15);
+    expect(spy).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalledTimes(15);
+  })
 
   test('that the THANK YOU function logs the correct information', () => {
     spy = jest.spyOn(console, 'log').mockImplementation();
-    events.emit('delivered', payload, delivered); // calls thankYou function
+    thank(payload);
     jest.advanceTimersByTime(5000);
     expect(spy).toHaveBeenCalled();
     expect(spy).toHaveBeenCalledTimes(1);

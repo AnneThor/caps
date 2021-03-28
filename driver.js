@@ -6,7 +6,7 @@ events.on('pickup', pickup);
 events.on('in-transit', inTransit);
 
 function pickup(payload, event) {
-  setInterval(() => {
+  setTimeout(() => {
     console.log(`DRIVER: picked up ${payload.orderId}`);
     let event = { event: 'in-transit' }
     events.emit('in-transit', payload, event);
@@ -14,9 +14,14 @@ function pickup(payload, event) {
 }
 
 function inTransit(payload) {
-  setInterval(() => {
+  setTimeout(() => {
     console.log(`DRIVER: delivered order ${payload.orderId}`);
     let event = { event: 'delivered' };
     events.emit('delivered', payload, event);
   }, 3000);
+}
+
+module.exports = {
+  pickup: pickup,
+  intransit: inTransit
 }

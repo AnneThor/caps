@@ -17,3 +17,5 @@ function log(payload, event) {
   }
   console.log("Event", obj)
 }
+
+module.exports = log;
